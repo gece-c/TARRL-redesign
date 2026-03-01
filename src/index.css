@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  @apply font-sans text-offWhite antialiased;
+  background: transparent;
+  min-height: 100vh;
+}
+
+::selection {
+  background-color: #bf0a30;
+  color: #f2f2f2;
+}
+
+.gradient-section {
+  background-image: linear-gradient(
+    135deg,
+    #002868 0%,
+    #0f1d5c 30%,
+    #261858 60%,
+    #361259 100%
+  );
+}
+
+.gradient-section-inverse {
+  background-image: linear-gradient(
+    135deg,
+    #361259 0%,
+    #261858 40%,
+    #0f1d5c 70%,
+    #002868 100%
+  );
+}
+
+/* Main app background: many stops so there are no visible bands or lines */
+.app-bg-gradient {
+  background-image: linear-gradient(
+    180deg,
+    #002868 0%,
+    #051f56 5%,
+    #0b1d55 10%,
+    #111b55 15%,
+    #171a56 20%,
+    #1d1958 25%,
+    #23185a 30%,
+    #28175c 35%,
+    #2b165c 40%,
+    #2d1658 45%,
+    #2c1756 50%,
+    #2a1855 55%,
+    #271954 60%,
+    #231a54 65%,
+    #1d1b54 70%,
+    #171c55 75%,
+    #111d56 80%,
+    #0b1e56 85%,
+    #051f57 90%,
+    #002868 95%,
+    #002868 100%
+  );
+}
+
+/* Section overlays: fade to transparent at top and bottom so boundaries don’t create lines */
+.section-overlay-soft {
+  background-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 40, 104, 0.06) 25%,
+    rgba(54, 18, 89, 0.1) 50%,
+    rgba(0, 40, 104, 0.06) 75%,
+    transparent 100%
+  );
+}
+
+.border-top-texasRed {
+  border-top: 1px solid #bf0a30;
+}
+
+.backdrop-card {
+  background: radial-gradient(circle at top left, rgba(54, 18, 89, 0.7), rgba(0, 40, 104, 0.85));
+  backdrop-filter: blur(18px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
