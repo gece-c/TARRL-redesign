@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import humanoidPng from "../assets/humanoid-png/humanoids-2.png";
 
 const steps = [
   {
@@ -25,25 +26,59 @@ const steps = [
   }
 ];
 
+/** Picks the step whose center is closest to the viewport center (scroll-spy style). */
+function useActiveStepByViewportCenter(
+  stepRefs: React.MutableRefObject<(HTMLDivElement | null)[]>,
+  stepIds: string[]
+) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const refs = stepRefs.current;
+
+    const updateActive = () => {
+      const viewportCenter = window.innerHeight / 2;
+      let bestIndex = 0;
+      let bestDistance = Infinity;
+
+      for (let i = 0; i < refs.length; i++) {
+        const el = refs[i];
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = Math.abs(center - viewportCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = i;
+        }
+      }
+
+      setActiveIndex((prev) => (prev !== bestIndex ? bestIndex : prev));
+    };
+
+    updateActive();
+    const raf = requestAnimationFrame(updateActive);
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
+    };
+  }, [stepIds.join(",")]);
+
+  return activeIndex;
+}
+
 const StepItem: React.FC<{
   step: (typeof steps)[number];
   index: number;
   active: boolean;
-  setActive: () => void;
-}> = ({ step, index, active, setActive }) => {
-  const ref = React.useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, {
-    amount: 0.4,
-    once: false
-  });
-
-  React.useEffect(() => {
-    if (inView) setActive();
-  }, [inView, setActive]);
-
+  stepRef: (el: HTMLDivElement | null) => void;
+}> = ({ step, index, active, stepRef }) => {
   return (
     <div
-      ref={ref}
+      ref={stepRef}
       className={`relative border-l border-offWhite/15 pl-5 py-5 transition-colors ${
         active ? "border-maroon" : ""
       }`}
@@ -63,10 +98,18 @@ const StepItem: React.FC<{
 };
 
 export const HowItWorks: React.FC = () => {
-  const [activeId, setActiveId] = useState(steps[0].id);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const activeIndex = steps.findIndex((s) => s.id === activeId);
+  const setStepRef = (index: number) => (el: HTMLDivElement | null) => {
+    stepRefs.current[index] = el;
+  };
+
+  const activeIndex = useActiveStepByViewportCenter(
+    stepRefs,
+    steps.map((s) => s.id)
+  );
+  const activeId = steps[activeIndex]?.id ?? steps[0].id;
   const stepNumber = String(activeIndex + 1).padStart(2, "0");
 
   return (
@@ -85,7 +128,6 @@ export const HowItWorks: React.FC = () => {
           <p className="mt-4 max-w-md text-sm leading-relaxed text-offWhite/80 md:text-base">
             Your location should not limit your impact.
           </p>
-
           <motion.div
             className="mt-10 flex h-40 items-center justify-center overflow-hidden rounded-3xl border border-offWhite/15 bg-texasBlue/60"
             initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
@@ -109,13 +151,16 @@ export const HowItWorks: React.FC = () => {
               >
                 {stepNumber}
               </motion.div>
-              <div className="absolute inset-x-10 flex justify-between text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-offWhite/60">
-                <span>Remote First</span>
-                <span>Embodied AI</span>
-                <span>Open-source robotics</span>
+              <div className="absolute inset-x-10 grid grid-cols-3 text-center align-center text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-offWhite/60">
+                <span className="mt-1.5">Remote First</span>
+                <span className="mt-1.5">Embodied AI</span>
+                <span className="">Open-source robotics</span>
               </div>
             </div>
           </motion.div>
+          <div className="hidden justify-center lg:flex">
+            <img src={humanoidPng} alt="" className="max-h-[260px]" />
+          </div>
         </div>
 
         <div className="space-y-2">
@@ -125,7 +170,7 @@ export const HowItWorks: React.FC = () => {
               step={step}
               index={index}
               active={activeId === step.id}
-              setActive={() => setActiveId(step.id)}
+              stepRef={setStepRef(index)}
             />
           ))}
         </div>

@@ -2,6 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
+import humanoidPng from "../assets/humanoid-png/humanoids-1.png";
+import robodogPng from "../assets/robodog-png/robodog-1.png";
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0 }
@@ -25,74 +28,94 @@ export const WhoWeAre: React.FC = () => {
   ];
 
   return (
-    <section id="who-we-are" className="relative bg-transparent py-20 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-offWhite/60">
-          Who We Are (And Are Not)
-        </p>
+    <section id="who-we-are" className="relative bg-transparent py-14 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:gap-10 lg:items-center">
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-offWhite/60">
+              Who We Are (And Are Not)
+            </p>
 
-        <motion.div
-          className="mt-8 space-y-4 border-l-2 border-texasRed/70 pl-5 sm:pl-6"
-          initial={prefersReducedMotion ? false : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={staggerChildren}
-        >
-          {lines.map((line) => (
-            <motion.p
-              key={line}
-              className="text-xl font-extrabold leading-tight tracking-tight sm:text-2xl md:text-3xl"
+            <motion.div
+              className="mt-8 space-y-4 border-l-2 border-texasRed/70 pl-5 sm:pl-6"
+              initial={prefersReducedMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={staggerChildren}
+            >
+              {lines.map((line) => (
+                <motion.p
+                  key={line}
+                  className="text-xl font-extrabold leading-tight tracking-tight sm:text-2xl md:text-3xl"
+                  variants={fadeInUp}
+                >
+                  {line}
+                </motion.p>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="mt-8 max-w-3xl space-y-4 text-sm leading-relaxed text-offWhite/80 md:text-base"
+              initial={prefersReducedMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
               variants={fadeInUp}
             >
-              {line}
-            </motion.p>
-          ))}
-        </motion.div>
+              <p>
+                We are Texas Advanced Robotics Research Lab, an open, venture driven Embodied AI
+                institute where curiosity meets courage and AI, robotics, and design collide.
+              </p>
+              <p>
+                TARRL is built primarily for PhD candidates, current PhDs and postdocs, and experienced
+                industry professionals who want to go beyond papers, titles, and conference badges and
+                actually ship code, systems, and robots that other people can use.
+              </p>
+              <p>
+                Whether your background is in AI or machine learning, robotics, software engineering,
+                systems architecture, human robot interaction, controls, product design, simulation, or
+                another relevant area, there is space for you to contribute at the Research Associate
+                level.
+              </p>
+            </motion.div>
 
-        <motion.div
-          className="mt-8 max-w-3xl space-y-4 text-sm leading-relaxed text-offWhite/80 md:text-base"
-          initial={prefersReducedMotion ? false : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeInUp}
-        >
-          <p>
-            We are Texas Advanced Robotics Research Lab, an open, venture driven Embodied AI
-            institute where curiosity meets courage and AI, robotics, and design collide.
-          </p>
-          <p>
-            TARRL is built primarily for PhD candidates, current PhDs and postdocs, and experienced
-            industry professionals who want to go beyond papers, titles, and conference badges and
-            actually ship code, systems, and robots that other people can use.
-          </p>
-          <p>
-            Whether your background is in AI or machine learning, robotics, software engineering,
-            systems architecture, human robot interaction, controls, product design, simulation, or
-            another relevant area, there is space for you to contribute at the Research Associate
-            level.
-          </p>
-        </motion.div>
+            <motion.div
+              className="mt-10 flex flex-wrap gap-4 text-sm"
+              initial={prefersReducedMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              variants={staggerChildren}
+            >
+              <motion.div
+                variants={fadeInUp}
+                className="rounded-2xl border border-offWhite/10 bg-texasBlue/30 px-4 py-3"
+              >
+                <p className="cursor-default text-sm font-medium text-offWhite/85">Remote first by design</p>
+              </motion.div>
+              <motion.div
+                variants={fadeInUp}
+                className="rounded-2xl border border-offWhite/10 bg-texasBlue/30 px-4 py-3"
+              >
+                <p className="cursor-default text-sm font-medium text-offWhite/85">Join from anywhere</p>
+              </motion.div>
+            </motion.div>
+          </div>
 
-        <motion.div
-          className="mt-10 flex flex-wrap gap-4 text-sm"
-          initial={prefersReducedMotion ? false : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={staggerChildren}
-        >
           <motion.div
+            className="flex justify-center lg:justify-end min-w-0"
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
             variants={fadeInUp}
-            className="rounded-2xl border border-offWhite/10 bg-texasBlue/30 px-4 py-3"
           >
-            <p className="text-sm font-medium text-offWhite/85">Remote first by design</p>
+            <img
+              src={humanoidPng}
+              alt="Humanoid robotics"
+              className="max-h-[200px] w-auto max-w-full object-contain sm:max-h-[280px] lg:max-h-[360px]"
+              loading="lazy"
+              decoding="async"
+            />
           </motion.div>
-          <motion.div
-            variants={fadeInUp}
-            className="rounded-2xl border border-offWhite/10 bg-texasBlue/30 px-4 py-3"
-          >
-            <p className="text-sm font-medium text-offWhite/85">Join from anywhere</p>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -116,10 +139,10 @@ export const WhyWeExist: React.FC = () => {
   ];
 
   return (
-    <section id="why-we-exist" className="relative bg-transparent py-20 sm:py-24">
-      <div className="relative mx-auto max-w-6xl px-4">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1.2fr)]">
-          <div>
+    <section id="why-we-exist" className="relative bg-transparent py-14 sm:py-20 lg:py-24">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1.2fr)]">
+          <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-offWhite/70">
               Why We Exist
             </p>
@@ -165,16 +188,31 @@ export const WhyWeExist: React.FC = () => {
             </motion.p>
           </div>
 
-          <div className="space-y-8">
+          <div className="flex flex-col gap-6 sm:gap-8 min-w-0">
+            <motion.div
+              className="flex justify-center min-w-0"
+              initial={prefersReducedMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={fadeInUp}
+            >
+              <img
+                src={robodogPng}
+                alt="Robotic dog platform"
+                className="max-h-[160px] w-auto max-w-full object-contain sm:max-h-[200px] md:max-h-[240px]"
+                loading="lazy"
+                decoding="async"
+              />
+            </motion.div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-offWhite/70">
                 Our Verticals
               </p>
-              <div className="mt-4 flex flex-wrap gap-3">
+              <div className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-3">
                 {verticals.map((vertical) => (
                   <motion.span
                     key={vertical}
-                    className="rounded-full border border-offWhite/25 px-3.5 py-1.5 text-xs font-medium text-offWhite/85"
+                    className="flex cursor-default items-center justify-center rounded-full border border-offWhite/25 px-3.5 py-1.5 text-center text-xs font-medium text-offWhite/85 w-full"
                     whileHover={{
                       borderColor: "#BF0A30",
                       backgroundColor: "rgba(140,28,58,0.25)",
@@ -186,22 +224,22 @@ export const WhyWeExist: React.FC = () => {
                 ))}
               </div>
             </div>
-
-            <motion.div
-              className="rounded-3xl border border-offWhite/10 bg-purple/30 p-5 text-sm leading-relaxed text-offWhite/80"
-              initial={prefersReducedMotion ? false : "hidden"}
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.4 }}
-              variants={fadeInUp}
-            >
-              <p>
-                Through our connection to the Texas innovation and space ecosystem, including NASA
-                related activity, SpaceX and other space leaders, and collaboration with Texas A&M,
-                TARRL is well positioned to explore how Embodied AI and robotics can support space
-                industry challenges, from terrestrial testbeds to off world scenarios.
-              </p>
-            </motion.div>
           </div>
+
+          <motion.div
+            className="w-full rounded-2xl sm:rounded-3xl border border-offWhite/10 bg-purple/30 p-4 sm:p-5 text-sm leading-relaxed text-offWhite/80 [&_p]:cursor-default lg:col-span-2"
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            variants={fadeInUp}
+          >
+            <p>
+              Through our connection to the Texas innovation and space ecosystem, including NASA
+              related activity, SpaceX and other space leaders, and collaboration with Texas A&M,
+              TARRL is well positioned to explore how Embodied AI and robotics can support space
+              industry challenges, from terrestrial testbeds to off world scenarios.
+            </p>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -246,9 +284,9 @@ export const WhatWeBelieve: React.FC = () => {
   );
 
   return (
-    <section id="what-we-believe" className="relative bg-transparent py-20 sm:py-24">
-      <div className="relative mx-auto max-w-6xl px-4">
-        <div className="max-w-3xl">
+    <section id="what-we-believe" className="relative bg-transparent py-14 sm:py-20 lg:py-24">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="max-w-3xl min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-offWhite/70">
             What We Believe
           </p>
@@ -261,7 +299,7 @@ export const WhatWeBelieve: React.FC = () => {
         </div>
 
         <motion.div
-          className="mt-10 grid gap-6 md:grid-cols-2"
+          className="mt-8 sm:mt-10 grid gap-4 sm:gap-6 md:grid-cols-2"
           initial={prefersReducedMotion ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -271,7 +309,7 @@ export const WhatWeBelieve: React.FC = () => {
             <motion.div
               key={belief.title}
               variants={fadeInUp}
-              className="backdrop-card group relative overflow-hidden rounded-3xl border border-offWhite/10 p-5 transition-colors"
+              className="backdrop-card group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-offWhite/10 p-4 sm:p-5 transition-colors min-w-0 [&_h3]:cursor-default [&_p]:cursor-default"
             >
               <div className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100">
                 <div className="h-full w-full bg-[radial-gradient(circle_at_top,_rgba(140,28,58,0.45),_transparent_60%)]" />
@@ -305,4 +343,3 @@ export const WhatWeBelieve: React.FC = () => {
     </section>
   );
 };
-

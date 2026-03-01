@@ -167,7 +167,7 @@ export const Hero: React.FC = () => {
                 : { delay: 1.6, duration: 0.6, ease: "easeOut" }
             }
           >
-            <div className="grid gap-6 text-left text-xs text-offWhite/80 sm:grid-cols-3 sm:text-center">
+            <div className="grid gap-6 place-items-center text-center text-xs text-offWhite/80 sm:grid-cols-3 sm:place-items-stretch">
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}

@@ -97,7 +97,7 @@ export const ResearchTracks: React.FC = () => {
           </p>
 
           <motion.div
-            className="mt-10 aspect-[4/3] w-full overflow-hidden rounded-3xl border border-offWhite/15 bg-texasBlue/60 p-6"
+            className="mt-10 w-full overflow-hidden rounded-3xl border border-offWhite/15 bg-texasBlue/60 p-6 lg:aspect-[4/3]"
             initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
             whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
