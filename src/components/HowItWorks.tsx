@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import humanoidPng from "../assets/humanoid-png/humanoids-2.png";
@@ -26,62 +26,20 @@ const steps = [
   }
 ];
 
-/** Picks the step whose center is closest to the viewport center (scroll-spy style). */
-function useActiveStepByViewportCenter(
-  stepRefs: React.MutableRefObject<(HTMLDivElement | null)[]>,
-  stepIds: string[]
-) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const refs = stepRefs.current;
-
-    const updateActive = () => {
-      const viewportCenter = window.innerHeight / 2;
-      let bestIndex = 0;
-      let bestDistance = Infinity;
-
-      for (let i = 0; i < refs.length; i++) {
-        const el = refs[i];
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const distance = Math.abs(center - viewportCenter);
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          bestIndex = i;
-        }
-      }
-
-      setActiveIndex((prev) => (prev !== bestIndex ? bestIndex : prev));
-    };
-
-    updateActive();
-    const raf = requestAnimationFrame(updateActive);
-    window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", updateActive);
-      window.removeEventListener("resize", updateActive);
-    };
-  }, [stepIds.join(",")]);
-
-  return activeIndex;
-}
-
 const StepItem: React.FC<{
   step: (typeof steps)[number];
   index: number;
   active: boolean;
-  stepRef: (el: HTMLDivElement | null) => void;
-}> = ({ step, index, active, stepRef }) => {
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}> = ({ step, index, active, onMouseEnter, onMouseLeave }) => {
   return (
     <div
-      ref={stepRef}
       className={`relative border-l border-offWhite/15 pl-5 py-5 transition-colors ${
         active ? "border-maroon" : ""
       }`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="absolute -left-[3px] top-6 h-2 w-2 rounded-full bg-offWhite" />
       <p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-offWhite/60">
@@ -99,16 +57,8 @@ const StepItem: React.FC<{
 
 export const HowItWorks: React.FC = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const setStepRef = (index: number) => (el: HTMLDivElement | null) => {
-    stepRefs.current[index] = el;
-  };
-
-  const activeIndex = useActiveStepByViewportCenter(
-    stepRefs,
-    steps.map((s) => s.id)
-  );
   const activeId = steps[activeIndex]?.id ?? steps[0].id;
   const stepNumber = String(activeIndex + 1).padStart(2, "0");
 
@@ -170,7 +120,8 @@ export const HowItWorks: React.FC = () => {
               step={step}
               index={index}
               active={activeId === step.id}
-              stepRef={setStepRef(index)}
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseLeave={() => {}}
             />
           ))}
         </div>

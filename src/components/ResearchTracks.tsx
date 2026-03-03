@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 const tracks = [
@@ -42,20 +41,13 @@ const TrackItem: React.FC<{
   active: boolean;
   setActive: () => void;
 }> = ({ track, index, active, setActive }) => {
-  const ref = React.useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, {
-    amount: 0.4,
-    once: false
-  });
-
-  React.useEffect(() => {
-    if (inView) setActive();
-  }, [inView, setActive]);
-
   return (
     <div
-      ref={ref}
-      className={`relative border-l border-offWhite/15 pl-5 py-5 transition-colors ${
+      role="button"
+      tabIndex={0}
+      onMouseEnter={setActive}
+      onFocus={setActive}
+      className={`relative cursor-default border-l border-offWhite/15 pl-5 py-5 transition-colors ${
         active ? "border-texasRed" : ""
       }`}
     >
