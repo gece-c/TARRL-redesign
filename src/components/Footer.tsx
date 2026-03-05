@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
             <a href="#how-it-works" className="hover:text-offWhite">
               How It Works
             </a>
-            <a href="#apply" className="hover:text-offWhite">
+            <a href="https://hephaestus.international/internships" target="_blank" rel="noopener noreferrer" className="hover:text-offWhite">
               Apply
             </a>
           </nav>

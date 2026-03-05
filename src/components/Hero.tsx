@@ -42,6 +42,34 @@ const stats = [
   }
 ];
 
+const TexasFlag: React.FC = () => (
+  <div
+    className="pointer-events-none absolute inset-0 z-0 min-h-full min-w-full opacity-30"
+    aria-hidden="true"
+  >
+    <svg
+      viewBox="0 0 2 1"
+      preserveAspectRatio="xMidYMid meet"
+      className="h-full w-full min-h-full min-w-full object-cover"
+      style={{ width: "100%", height: "100%" }}
+    >
+      {/* Blue vertical bar (left third) */}
+      <rect width="0.667" height="1" fill="#002869" />
+      {/* White five-pointed star centered in blue bar */}
+      <g transform="translate(0.3335, 0.5) scale(0.22)">
+        <path
+          fill="#fff"
+          d="M0,-0.2 L0.059,-0.062 L0.191,-0.062 L0.076,0.024 L0.118,0.154 L0,0.076 L-0.118,0.154 L-0.076,0.024 L-0.191,-0.062 L-0.059,-0.062 Z"
+        />
+      </g>
+      {/* White (top half of right 2/3) */}
+      <rect x="0.667" width="1.333" height="0.5" fill="#fff" />
+      {/* Red (bottom half of right 2/3) */}
+      <rect x="0.667" y="0.5" width="1.333" height="0.5" fill="#BF0A30" />
+    </svg>
+  </div>
+);
+
 export const Hero: React.FC = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -50,6 +78,7 @@ export const Hero: React.FC = () => {
       id="hero"
       className="relative flex min-h-screen items-center overflow-hidden bg-transparent"
     >
+      <TexasFlag />
       <ParticleNetwork />
 
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 pb-16 pt-28 text-center md:pt-32 lg:pb-24">
@@ -143,7 +172,9 @@ export const Hero: React.FC = () => {
             }
           >
             <a
-              href="#apply"
+              href="https://hephaestus.international/internships"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-texasRed px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-offWhite"
             >
               Apply to Join TARRL

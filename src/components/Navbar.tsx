@@ -105,7 +105,9 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
           <motion.a
-            href="#apply"
+            href="https://hephaestus.international/internships"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-texasRed px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-offWhite"
             whileHover={{ scale: prefersReducedMotion ? 1 : 1.03 }}
             whileTap={{ scale: prefersReducedMotion ? 1 : 0.97 }}
@@ -130,7 +132,9 @@ export const Navbar: React.FC = () => {
               </a>
             ))}
             <a
-              href="#apply"
+              href="https://hephaestus.international/internships"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-1 rounded-full bg-texasRed px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.2em] text-offWhite"
             >

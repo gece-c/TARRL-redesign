@@ -40,7 +40,9 @@ export const ApplyCTA: React.FC = () => {
           }
         >
           <a
-            href="#apply"
+            href="https://hephaestus.international/internships"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-texasRed px-8 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-offWhite"
           >
             Apply to Join TARRL
