@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-40 bg-[rgba(0,40,104,0.85)] backdrop-blur-md transition-colors"
+      className="fixed inset-x-0 top-0 z-40 bg-[rgba(0,25,66,0.85)] backdrop-blur-md transition-colors"
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:py-4">
         <a href="#hero" className="flex items-center gap-2">

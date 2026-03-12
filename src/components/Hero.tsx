@@ -44,28 +44,27 @@ const stats = [
 
 const TexasFlag: React.FC = () => (
   <div
-    className="pointer-events-none absolute inset-0 z-0 min-h-full min-w-full opacity-30"
+    className="pointer-events-none my-6 w-full aspect-[3/2] px-4 sm:px-6 md:px-10 lg:px-16"
     aria-hidden="true"
   >
     <svg
-      viewBox="0 0 2 1"
+      viewBox="0 0 3 2"
       preserveAspectRatio="xMidYMid meet"
-      className="h-full w-full min-h-full min-w-full object-cover"
-      style={{ width: "100%", height: "100%" }}
+      className="h-full w-full object-cover"
     >
-      {/* Blue vertical bar (left third) */}
-      <rect width="0.667" height="1" fill="#002869" />
-      {/* White five-pointed star centered in blue bar */}
-      <g transform="translate(0.3335, 0.5) scale(0.22)">
+      {/* Blue vertical bar: one-third the length (fly) per Texas Gov Code Ch 3100 */}
+      <rect width="1" height="2" fill="#002869" />
+      {/* White five-pointed star: diameter = 3/4 of blue stripe width, centered in blue bar */}
+      <g transform="translate(0.5, 1) scale(1.875)">
         <path
           fill="#fff"
           d="M0,-0.2 L0.059,-0.062 L0.191,-0.062 L0.076,0.024 L0.118,0.154 L0,0.076 L-0.118,0.154 L-0.076,0.024 L-0.191,-0.062 L-0.059,-0.062 Z"
         />
       </g>
       {/* White (top half of right 2/3) */}
-      <rect x="0.667" width="1.333" height="0.5" fill="#fff" />
+      <rect x="1" y="0" width="2" height="1" fill="#fff" />
       {/* Red (bottom half of right 2/3) */}
-      <rect x="0.667" y="0.5" width="1.333" height="0.5" fill="#BF0A30" />
+      <rect x="1" y="1" width="2" height="1" fill="#BF0A30" />
     </svg>
   </div>
 );
@@ -78,7 +77,6 @@ export const Hero: React.FC = () => {
       id="hero"
       className="relative flex min-h-screen items-center overflow-hidden bg-transparent"
     >
-      <TexasFlag />
       <ParticleNetwork />
 
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 pb-16 pt-28 text-center md:pt-32 lg:pb-24">
@@ -100,6 +98,19 @@ export const Hero: React.FC = () => {
             <p className="mt-3 text-lg font-medium text-offWhite/85 md:text-xl">
               Texas Advanced Robotics Research Lab
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={fadeUp}
+            transition={
+              prefersReducedMotion
+                ? undefined
+                : { delay: 0.45, duration: 0.5, ease: "easeOut" }
+            }
+          >
+            <TexasFlag />
           </motion.div>
 
           <motion.div
