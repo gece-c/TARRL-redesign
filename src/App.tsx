@@ -10,7 +10,7 @@ import { ApplyCTA } from "./components/ApplyCTA";
 import { Footer } from "./components/Footer";
 
 const pageGradient =
-  "linear-gradient(to bottom, #002868 0%, #002868 20%, #361259 45%, #361259 60%, #002868 80%, #002868 100%)";
+  "linear-gradient(to bottom, #001942 0%, #001942 20%, #311050 45%, #311050 60%, #00245E 80%, #00245E 100%)";
 
 const App: React.FC = () => {
   return (
