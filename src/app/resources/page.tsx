@@ -1,50 +1,53 @@
-const resources = [
-  {
-    title: "How It Works",
-    description:
-      "Understand the three-tier model: foundation learning, transition to earning, and professional growth.",
-  },
-  {
-    title: "Student Handbook",
-    description:
-      "Find policies, schedules, support services, certification requirements, and communication guidelines.",
-  },
-  {
-    title: "Blog",
-    description:
-      "Read insights on tech education, tutorials, and student success stories from mentors and industry voices.",
-  },
-  {
-    title: "FAQs",
-    description:
-      "Get answers to common questions about applications, support, financing options, and outcomes.",
-  },
-];
+import { SectionCard } from "@/components/ui/section-card";
+import { resources } from "@/content/site-content";
+import { ButtonLink } from "@/components/ui/button-link";
 
 export default function ResourcesPage() {
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 py-12 sm:gap-14 sm:px-6 sm:py-16 lg:px-8">
-      <section className="rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm md:p-10">
-        <h1 className="text-3xl font-bold text-zinc-900 sm:text-4xl">Resources</h1>
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-zinc-600 sm:text-base">
-          Access guides, handbooks, tutorials, and reference content that
-          supports your learning journey from beginner to professional.
+    <div className="space-y-10">
+      <section className="text-center">
+        <h1 className="page-title">Learning Resources</h1>
+        <p className="mx-auto mb-8 max-w-3xl text-[var(--text-muted)]">
+          Access our comprehensive collection of learning materials, tutorials, and guides to support your learning
+          journey.
         </p>
       </section>
 
-      <section className="grid gap-5 md:grid-cols-2">
-        {resources.map((item) => (
-          <article
-            key={item.title}
-            className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6"
+      <section aria-label="Resource categories" className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {resources.map((resource) => (
+          <SectionCard
+            key={resource.slug}
+            title={resource.title}
+            footer={
+              <ButtonLink href={`/resources/${resource.slug}`} variant="secondary">
+                Open Page
+              </ButtonLink>
+            }
           >
-            <h2 className="text-xl font-semibold text-zinc-900">{item.title}</h2>
-            <p className="mt-3 text-sm leading-7 text-zinc-600">
-              {item.description}
-            </p>
-          </article>
+            <p>{resource.summary}</p>
+          </SectionCard>
         ))}
       </section>
-    </main>
+
+      <section aria-labelledby="featured-resources-title">
+        <h2 id="featured-resources-title" className="mb-4 text-3xl font-semibold">
+          Featured Resources
+        </h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          <SectionCard title="Complete Web Development Guide">
+            <p className="text-sm text-[var(--text-muted)]">Guide · 8 hours</p>
+            <p className="mt-3">A comprehensive guide covering HTML, CSS, JavaScript, and modern frameworks.</p>
+          </SectionCard>
+          <SectionCard title="React Best Practices">
+            <p className="text-sm text-[var(--text-muted)]">Tutorial · 4 hours</p>
+            <p className="mt-3">Learn the best practices for building scalable React applications.</p>
+          </SectionCard>
+          <SectionCard title="API Development with Node.js">
+            <p className="text-sm text-[var(--text-muted)]">Course · 6 hours</p>
+            <p className="mt-3">Build robust and scalable APIs using Node.js and Express.</p>
+          </SectionCard>
+        </div>
+      </section>
+    </div>
   );
 }

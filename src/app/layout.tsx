@@ -1,38 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteNavbar } from "@/components/site-navbar";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
   title: "Innovation Bootcamp University",
-  description:
-    "Cooperative education model that helps students transition from learning to earning.",
+  description: "From paying to earning tech skills."
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="en">
+      <body>
+        <a href="#main-content" className="skip-link focus-ring">
+          Skip to main content
+        </a>
         <SiteNavbar />
-        <div className="flex-1">{children}</div>
+        <main id="main-content" className="container-shell py-10">
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>
