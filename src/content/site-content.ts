@@ -41,7 +41,7 @@ export const navItems = [
 ];
 
 export const hero = {
-  badge: "Applications Open for 2025",
+  badge: "Applications Open",
   title: "Launch Your Tech Career From Student to Professional",
   body:
     "Start with foundational education, then transition to earning while you learn through real projects in high-demand tech roles.",
