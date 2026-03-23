@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --background: #222222;
+  --foreground: #f4f7fb;
+  --accent: #13a7cb;
+  --accent-soft: #9a6bd4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 65%, var(--accent-soft) 35%);
+  color: #ffffff;
+}
+/* Unify surfaces so sections blend into one dark canvas. */
+.bg-white {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+.bg-zinc-50 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.bg-zinc-100 {
+  background-color: rgba(19, 167, 203, 0.12) !important;
+}
+
+.bg-zinc-200 {
+  background-color: rgba(19, 167, 203, 0.2) !important;
+}
+
+.text-zinc-900 {
+  color: #f4f7fb !important;
+}
+
+.text-zinc-800 {
+  color: #e7edf5 !important;
+}
+
+.text-zinc-700 {
+  color: #d7e3f0 !important;
+}
+
+.text-zinc-600 {
+  color: #b9ccdf !important;
+}
+
+.text-zinc-500 {
+  color: #96abc0 !important;
+}
+
+.border-zinc-300,
+.border-zinc-200 {
+  border-color: rgba(154, 107, 212, 0.3) !important;
+}
+
