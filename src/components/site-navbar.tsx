@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { navItems, opportunityPages, resources } from "@/content/site-content";
 import { ButtonLink } from "@/components/ui/button-link";
 
@@ -6,8 +7,9 @@ export function SiteNavbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-[#3f3f3f] bg-[var(--bg)]/95 backdrop-blur">
       <div className="container-shell flex items-center justify-between py-4">
-        <Link href="/" className="focus-ring rounded-md text-lg font-bold">
-          Innovation Bootcamp University
+        <Link href="/" className="focus-ring flex items-center gap-3 rounded-md text-lg font-bold">
+          <Image src="/flolabs-logo.svg" alt="FloLabs logo" width={36} height={36} priority />
+          <span>Innovation Bootcamp University</span>
         </Link>
         <nav aria-label="Main navigation">
           <ul className="flex items-center gap-4">

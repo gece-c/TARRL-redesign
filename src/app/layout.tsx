@@ -5,7 +5,10 @@ import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
   title: "Innovation Bootcamp University",
-  description: "From paying to earning tech skills."
+  description: "From paying to earning tech skills.",
+  icons: {
+    icon: "/flolabs-logo.svg"
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

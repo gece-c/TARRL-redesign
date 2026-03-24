@@ -1,6 +1,7 @@
 import { ButtonLink } from "@/components/ui/button-link";
 import { IndustryFeedbackCarousel } from "@/components/industry-feedback-carousel";
 import { SectionCard } from "@/components/ui/section-card";
+import Image from "next/image";
 import {
   careerOpportunitiesSection,
   faqAccordionItems,
@@ -14,28 +15,50 @@ import {
 export default function HomePage() {
   return (
     <div className="space-y-14">
-      <section aria-labelledby="home-title" className="rounded-2xl bg-[var(--surface)] p-8">
-        <p className="mb-3 inline-block rounded-full border border-[var(--primary)] px-3 py-1 text-sm text-[var(--primary)]">
-          {hero.badge}
-        </p>
-        <h1 id="home-title" className="page-title max-w-3xl">
-          {hero.title}
-        </h1>
-        <p className="max-w-3xl text-[var(--text-muted)]">{hero.body}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <ButtonLink href={hero.actions[0].href}>{hero.actions[0].label}</ButtonLink>
-          <ButtonLink href={hero.actions[1].href} variant="ghost">
-            {hero.actions[1].label}
-          </ButtonLink>
+      <section aria-labelledby="home-title" className="hero-reference">
+        <div className="hero-reference__content">
+          <p className="mb-3 inline-block rounded-full border border-[var(--primary)] px-3 py-1 text-sm text-[var(--primary)]">
+            {hero.badge}
+          </p>
+          <h1 id="home-title" className="page-title">
+            Applications Open for 2026
+            <br />
+            <span className="hero-reference__title-accent">Launch Your Tech Career</span>
+          </h1>
+          <p className="max-w-2xl text-[var(--text-muted)]">{hero.body}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <ButtonLink href={hero.actions[0].href}>{hero.actions[0].label}</ButtonLink>
+            <ButtonLink href={hero.actions[1].href} variant="ghost">
+              {hero.actions[1].label}
+            </ButtonLink>
+          </div>
         </div>
-      </section>
 
-      <section aria-label="Key program stats" className="grid gap-4 md:grid-cols-4">
-        {hero.stats.map((stat) => (
-          <SectionCard key={stat.label} title={stat.value}>
-            <p>{stat.label}</p>
-          </SectionCard>
-        ))}
+        <div className="hero-reference__media-wrap" aria-label="Hero program highlights">
+          <div className="hero-reference__blob hero-reference__blob--cyan" aria-hidden="true" />
+          <div className="hero-reference__blob hero-reference__blob--purple" aria-hidden="true" />
+          <Image
+            src="/hero-person.svg"
+            alt="Student standing in front of abstract shapes"
+            width={531}
+            height={582}
+            className="hero-reference__person"
+            priority
+          />
+          {hero.stats.map((stat, index) => (
+            <article
+              key={stat.label}
+              className={`hero-stat-card hero-stat-card--${index + 1}`}
+              aria-label={`${stat.label}: ${stat.value}`}
+            >
+              <p className="hero-stat-card__icon" aria-hidden="true">
+                {index === 0 ? "◌◌" : index === 1 ? "$" : index === 2 ? "○" : "</>"}
+              </p>
+              <p className="hero-stat-card__value">{stat.value}</p>
+              <p className="hero-stat-card__label">{stat.label}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section aria-labelledby="why-choose-title" className="rounded-2xl bg-[var(--surface)] p-8">
